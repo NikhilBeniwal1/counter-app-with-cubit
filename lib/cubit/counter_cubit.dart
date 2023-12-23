@@ -7,7 +7,7 @@ class CounterCubit extends Cubit<int> {
 
   void increment(){
 
-    emit(state+4);
+    emit(state+3);
 
   }
 
