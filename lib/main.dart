@@ -45,12 +45,12 @@ class HomeScreen extends StatelessWidget {
         children: [
           FloatingActionButton(onPressed: () {
 
-context.read<CounterCubit>().decrement();
+/*context.read<CounterCubit>().decrement();*/
 
           }, child: Icon(Icons.remove),),
           FloatingActionButton(onPressed: () {
 
-            BlocProvider.of<CounterCubit>(context).increment();
+           /* BlocProvider.of<CounterCubit>(context).increment();*/
 
           }
               , child: Icon(Icons.add)),
