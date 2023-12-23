@@ -1,24 +1,22 @@
+import 'package:expense_new_ui/counter_provider.dart';
 import 'package:flutter/material.dart';
-
-import "package:flutter_bloc/flutter_bloc.dart";
-
-import 'cubit/counter_cubit.dart';
+import 'package:provider/provider.dart';
 void main() {
-  runApp(MyApp());
+  runApp(
+ChangeNotifierProvider(
+  create: (context) => CounterProvider(),
+child: MyApp(),
+));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "cubit and bloc trial",
-      home: BlocProvider<CounterCubit>(
-        create: (context) => CounterCubit(),
-        child: HomeScreen(),
-      )
-
+      home: HomeScreen() ,
     );
   }
 }
@@ -31,12 +29,11 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Colors.grey.shade200,
-        child: Center(child:
-         BlocBuilder<CounterCubit,int>(builder: (context, state) {
-           return Text("$state");
-         }, )
-          /*Text("${context.watch<CounterCubit>().state
-        }", style: TextStyle(fontSize: 30),)*/
+        child: Center(
+            child: Text("${
+                Provider.of<CounterProvider>(context).countvalue()
+                //context.watch<CounterProvider>().state
+            } ")
         ),
       ),
 
@@ -44,12 +41,14 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           FloatingActionButton(onPressed: () {
+            context.read<CounterProvider>().decrementcounter();
 
+// Provider.of<CounterProvider>(context).decrementcounter();  not working
 /*context.read<CounterCubit>().decrement();*/
 
           }, child: Icon(Icons.remove),),
           FloatingActionButton(onPressed: () {
-
+context.read<CounterProvider>().incrementcounter();
            /* BlocProvider.of<CounterCubit>(context).increment();*/
 
           }
